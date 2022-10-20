@@ -18,8 +18,9 @@ jobs:
       - name: Run production migration
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy
-        run: jq '.authorizationToken' at.json
+        run: npx prisma migrate deploy > at.json
+      - name: Run rollback if deploy failed
+        run: jq 'Applying migration' at.json
       - name: Run rollback if deploy failed
         if: failure()
         env:
