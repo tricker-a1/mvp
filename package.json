@@ -1,0 +1,68 @@
+{
+  "name": "crypto_perk_backend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CryptoPerk backend",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "pre-commit": "lint-staged"
+  },
+  "dependencies": {
+    "@fastify/multipart": "^7.2.0",
+    "@nestjs/common": "^9.1.4",
+    "@nestjs/config": "^2.2.0",
+    "@nestjs/core": "^9.1.4",
+    "@nestjs/platform-fastify": "^9.1.4",
+    "@nestjs/swagger": "^6.1.2",
+    "@prisma/client": "^4.4.0",
+    "@sendgrid/mail": "^7.7.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "csv-parse": "^5.3.0",
+    "magic-admin-esm": "^1.4.3",
+    "node-fetch": "^3.2.10",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.5.7",
+    "stripe": "^10.13.0",
+    "swagger-ui-express": "^4.5.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^9.1.4",
+    "@nestjs/schematics": "^9.0.3",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "pino-pretty": "^9.1.1",
+    "prettier": "^2.7.1",
+    "prisma": "^4.4.0",
+    "source-map-support": "^0.5.21",
+    "ts-loader": "^9.4.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}

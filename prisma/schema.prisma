@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  issuer          String?            @unique
+  email           String             @unique
+  recoveringEmail String?
+  firstname       String?
+  lastname        String?
+  role            Role               @default(Employee)
+  isEnrolled      Boolean
+  inviterId       String?
+  avatar          String?
+  username        String?            @unique
+  country         String?
+  startOfWork     DateTime?
+  dateOfBirth     DateTime?
+  phone           String?            @unique
+  isFired         Boolean?           @default(false)
+  firingReason    String?
+  xpub            String?
+  addresses       String[]           @default([])
+  permissions     Permission[]
+  customerId      String?
+  cards           Card[]
+  kudos           Int?               @default(0)
+  sendedKudos     KudosTransaction[] @relation("SendedKudos")
+  recipientKudos  KudosTransaction[] @relation("RecipientKudos")
+  company         Company?           @relation(fields: [companyId], references: [id])
+  companyId       String?            @db.Uuid
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index(issuer)
+}
+
+enum Role {
+  Employee
+  Admin
+  SuperAdmin
+}
+
+enum Permission {
+  InviteEmployees
+  ManageBillingInformation
+  SetPermissionsForOthers
+}
+
+model Company {
+  id                String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name              String?
+  logo              String?
+  industry          Industry         @relation(fields: [industryId], references: [id])
+  industryId        String           @db.Uuid
+  country           String?
+  hashtags          CompanyHashtag[]
+  website           String?
+  size              Int
+  brandColor        String?
+  includeLogoOnWall Boolean          @default(true)
+  linkedin          String?
+  facebook          String?
+  twitter           String?
+  customerId        String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  users             User[]
+  cards             Card[]
+}
+
+model Industry {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  value     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  companies Company[]
+}
+
+model Hashtag {
+  id        String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  value     String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  companies CompanyHashtag[]
+}
+
+model CompanyHashtag {
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String  @db.Uuid
+  hashtag   Hashtag @relation(fields: [hashtagId], references: [id])
+  hashtagId String  @db.Uuid
+
+  @@id([companyId, hashtagId])
+}
+
+model Card {
+  id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  paymentMethodId String
+  isDefault       Boolean
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User?    @relation(fields: [userId], references: [id])
+  userId          String?  @db.Uuid
+  company         Company? @relation(fields: [companyId], references: [id])
+  companyId       String?  @db.Uuid
+}
+
+model KudosTransaction {
+  id          String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  status      TransactionStatus @default(Pending)
+  amount      Int
+  sender      User?             @relation("SendedKudos", fields: [senderId], references: [id])
+  senderId    String?           @db.Uuid
+  recipient   User?             @relation("RecipientKudos", fields: [recipientId], references: [id])
+  recipientId String?           @db.Uuid
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+enum TransactionStatus {
+  Pending
+  Success
+  Failed
+}
