@@ -19,7 +19,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: | 
             npx prisma migrate deploy --preview-feature > errors.txt || true
-            echo ::set-output name=errors::`cat errors.txt`
+            echo "{name}={errors} cat errors.txt" >> $GITHUB_OUTPUT
       - name: get migration id
         if: failure()
         run:  echo ${{ steps.npx_fails.outputs.errors }} 
