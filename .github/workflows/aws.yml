@@ -18,7 +18,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy > at.json
       - name: get migration id
-        run: awk -F\' '{print $2,$4}' at.json
+        run: awk -F "\'" '{print $2" "$4}' at.json
       - name: Run rollback if deploy failed
         if: failure()
         env:
