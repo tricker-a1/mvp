@@ -17,12 +17,12 @@ jobs:
         id: npx
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy --preview-feature > att.json $GITHUB_OUTPUT
+        run: npx prisma migrate deploy --preview-feature > att.json 
       - name: get migration id
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run:  echo ${{ steps.tests.outputs.stdout }} 
+        run:  cut -d\' -f2 att.json 
       - name: Run rollback if deploy failed
         if: failure()
         env:
