@@ -16,7 +16,7 @@ jobs:
       - name: Run production migration
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy > at.json
+        run: npx prisma migrate deploy > att.json
       - name: get migration id
         if: failure()
         run: cat at.json 
