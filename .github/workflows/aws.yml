@@ -19,7 +19,7 @@ jobs:
         run: npx prisma migrate deploy --preview-feature > att.json
       - name: get migration id
         if: failure()
-        run: npx prisma migrate diff | npx prisma db execute
+        run: npx prisma migrate diff
       - name: Run rollback if deploy failed
         if: failure()
         env:
