@@ -17,10 +17,10 @@ jobs:
         id: npx
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy --preview-feature > att.json 
+        run: npx prisma migrate deploy --preview-feature > out.json 
       - name: get migration id
         if: failure()
-        run: less att.json 
+        run: less out.json 
       - name: Run rollback if deploy failed
         if: failure()
         env:
