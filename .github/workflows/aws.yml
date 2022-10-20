@@ -21,7 +21,7 @@ jobs:
             npx prisma migrate deploy --preview-feature > errors.txt || true
             echo ::save-state name=errors::`cat errors.txt`
       - name: get migration id
-        run:  echo ${{ steps.npx_fails.outputs.errors }} 
+        run:  echo ${{ steps.npx.outputs.errors }} 
       - name: Run rollback if deploy failed
         if: failure()
         env:
