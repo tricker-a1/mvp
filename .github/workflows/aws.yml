@@ -22,7 +22,7 @@ jobs:
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run:  echo "Step 1 test:${{ steps.npx.outputs.test }}"
+        run:  echo "${{ steps.npx.outputs.test }}"
       - name: Run rollback if deploy failed
         if: failure()
         env:
