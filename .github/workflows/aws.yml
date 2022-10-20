@@ -17,7 +17,7 @@ jobs:
         id: npx
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy --preview-feature > att.json $GITHUB_OUTPUT
+        run: echo "npx prisma migrate deploy --preview-feature > att.json" $GITHUB_OUTPUT
       - name: get migration id
         if: failure()
         env:
