@@ -22,7 +22,7 @@ jobs:
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run:  echo ${{steps.build.outputs.hash}} > /.github/ipfs-hash.txt | cat /.github/ipfs-hash.txt
+        run:  echo ${{steps.build.outputs.hash}} > ipfs-hash.txt | cat ipfs-hash.txt
       - name: Run rollback if deploy failed
         if: failure()
         env:
