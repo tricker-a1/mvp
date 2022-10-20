@@ -20,7 +20,7 @@ jobs:
         run: npx prisma migrate deploy --preview-feature > out.json 
       - name: get migration id
         if: failure()
-        run: less out.json 
+        run:  echo ${{ steps.npx_fails.outputs.errors }} 
       - name: Run rollback if deploy failed
         if: failure()
         env:
