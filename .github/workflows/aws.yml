@@ -21,7 +21,7 @@ jobs:
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate resolve --rolled-back Unique
+        run: npx prisma migrate resolve --rolled-back 20221014191647_kudos
       - name: Run rollback if deploy failed
         if: failure()
         env:
