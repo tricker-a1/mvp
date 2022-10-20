@@ -19,6 +19,8 @@ jobs:
         run: npx prisma migrate deploy --preview-feature > att.json
       - name: get migration id
         if: failure()
+        env:
+         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate resolve --rolled-back Unique
       - name: Run rollback if deploy failed
         if: failure()
