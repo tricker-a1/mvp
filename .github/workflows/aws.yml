@@ -21,7 +21,6 @@ jobs:
             npx prisma migrate deploy --preview-feature > errors.txt || true
             echo "{name}={errors} cat errors.txt" >> $GITHUB_OUTPUT
       - name: get migration id
-        if: failure()
         run:  echo ${{ steps.npx_fails.outputs.errors }} 
       - name: Run rollback if deploy failed
         if: failure()
