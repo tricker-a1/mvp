@@ -23,13 +23,13 @@ jobs:
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            sed '1!d ; s/.$//' errors.txt > init.txt
-            sed '2!d ; s/.$//' errors.txt > wallet_addresses.txt
-            sed '3!d ; s/.$//' errors.txt > kudos.txt
+            sed '1!d ; s/.$//' errors.txt 
+            sed '2!d ; s/.$//' errors.txt 
+            sed '3!d ; s/.$//' errors.txt 
             exit 1
 
       - name: Run rollback if deploy failed
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate resolve --rolled-back 20221014191647_kudos 20221011112854_init 20221012103315_wallet_addresses
+        run: npx prisma migrate resolve --rolled-back 20221011112854_init 20221012103315_wallet_addresses 20221014191647_kudos
