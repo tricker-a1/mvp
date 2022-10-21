@@ -18,25 +18,20 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
-      - name: get migration id
+      - name: get migration id and push it into github_env
         if: failure()
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             sed '1!d ; s/.$//' errors.txt > 1.txt
-            
             sed '2!d ; s/.$//' errors.txt > 2.txt
-            
             sed '3!d ; s/.$//' errors.txt > 3.txt
-            cat 1.txt
-            cat 2.txt
-            cat 3.txt
           
       
   rollback:
     runs-on: ubuntu-latest
     needs: migrate
-    if: always()
+    if: failure()
     steps:
     - uses: actions/checkout@v2
     - name: Run rollback if deploy failed
