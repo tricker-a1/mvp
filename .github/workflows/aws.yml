@@ -23,11 +23,5 @@ jobs:
             ls -d */  > errors.txt
       - name: get migration id
         if: failure()
-      
         run: cat errors.txt
-
-            
-      - name: Run rollback if deploy failed
-        if: success()
-        
 
