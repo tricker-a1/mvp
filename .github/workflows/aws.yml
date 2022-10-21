@@ -24,6 +24,7 @@ jobs:
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
+            cat /home/runner/work/mvp/mvp/prisma/migrations/errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "INIT=$INIT" >> $GITHUB_ENV\
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
