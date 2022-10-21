@@ -41,4 +41,4 @@ jobs:
 
       env:
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      run: npx prisma migrate resolve --rolled-back 20221014191647_kudos  
+      run: npx prisma migrate resolve --rolled-back $KUDOS
