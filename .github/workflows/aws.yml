@@ -34,7 +34,6 @@ jobs:
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
             npx prisma migrate resolve --rolled-back $KUDOS
-            exit 0
             npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
             exit 0
             npx prisma migrate resolve --rolled-back $INIT
