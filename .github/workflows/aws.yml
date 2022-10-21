@@ -23,9 +23,9 @@ jobs:
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            sed '1!d ; s/.$//' errors.txt > 1.txt >> $GITHUB_ENV
-            sed '2!d ; s/.$//' errors.txt > 2.txt >> $GITHUB_ENV
-            sed '3!d ; s/.$//' errors.txt > 3.txt >> $GITHUB_ENV
+            sed '1!d ; s/.$//' errors.txt > 1.txt echo '1<<EOF' >> $GITHUB_ENV
+            sed '2!d ; s/.$//' errors.txt > 2.txt echo '2<<EOF' >> $GITHUB_ENV
+            sed '3!d ; s/.$//' errors.txt > 3.txt echo '3<<EOF' >> $GITHUB_ENV
           
       
   rollback:
