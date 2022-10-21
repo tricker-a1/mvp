@@ -21,19 +21,16 @@ jobs:
       - name: get migration id and push it into github_env
         if: failure()
         run: |            
-            pwd
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            sed '1!d ; s/.$//' errors.txt
-            sed '2!d ; s/.$//' errors.txt
-            sed '3!d ; s/.$//' errors.txt
+
             INIT=$(sed '1!d ; s/.$//' errors.txt)
             echo "INIT=$INIT" >> $GITHUB_ENV\
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' errors.txt)
             echo "WALLET_ADDRESSES=$WALLET_ADDRESSES" >> $GITHUB_ENV
             KUDOS=$(sed '3!d ; s/.$//' errors.txt )
             echo "KUDOS=$KUDOS" >> $GITHUB_ENV
-            cd /home/runner/work/mvp/mvp
+            cd /home/runner/work/mvp/mvp/prisma
             npx prisma migrate resolve --rolled-back "${{env.KUDOS}}"
             npx prisma migrate resolve --rolled-back "${{env.INIT}}"
             npx prisma migrate resolve --rolled-back "${{env.WALLET_ADDRESSES}}"
