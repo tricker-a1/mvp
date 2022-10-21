@@ -42,14 +42,14 @@ jobs:
          run: npx prisma migrate resolve --rolled-back $KUDOS
          continue-on-error: true
          
-      - name: kudos
+      - name: kudos1
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
          run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
          continue-on-error: true
          
-      - name: kudos
+      - name: kudos2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
