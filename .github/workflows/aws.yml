@@ -18,27 +18,20 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
             
-      - name: Run migration status
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        if: failure()
-        run: npx prisma migrate status > test.txt
-         
       - name: get migration id and push it into github_env
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
         id: npx
         run: |            
-            cat test.txt
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{INIT}={$INIT}" >> $GITHUB_ENV
+            echo "{INIT}={$INIT}" 
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" >> $GITHUB_ENV
+            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" 
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
+            echo "{KUDOS}={$KUDOS}" 
             cd /home/runner/work/mvp/mvp
            
       - name: kudos
