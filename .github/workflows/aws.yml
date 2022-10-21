@@ -34,7 +34,8 @@ jobs:
             cat 3.txt
             exit 1
           
-     rollback:
+      
+  rollback:
         runs-on: ubuntu-latest
         steps:
          - uses: actions/checkout@v2
