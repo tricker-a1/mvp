@@ -33,9 +33,7 @@ jobs:
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
             
-         
       - name: kudos
-      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
@@ -44,7 +42,6 @@ jobs:
 
          
       - name: kudos1
-      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
@@ -52,7 +49,6 @@ jobs:
       - run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
 
       - name: kudos2
-      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
