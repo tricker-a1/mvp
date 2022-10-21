@@ -23,7 +23,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
         id: npx
-        continue-on-error: true
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
@@ -40,4 +39,7 @@ jobs:
             npx prisma migrate resolve --rolled-back $KUDOS
             npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
             npx prisma migrate resolve --rolled-back $INIT
-            
+         
+        continue-on-error: true
+         
+         
