@@ -36,7 +36,7 @@ jobs:
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             echo ::set-output name=KUDOS::$KUDOS 
             cd /home/runner/work/mvp/mvp
-            npx prisma migrate resolve --rolled-back ${{env.KUDOS}}
+            npx prisma migrate resolve --rolled-back $KUDOS
             npx prisma migrate resolve --rolled-back ${{env.WALLET_ADDRESSES}}
             npx prisma migrate resolve --rolled-back ${{env.INIT}}
             
