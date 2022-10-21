@@ -22,7 +22,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
-        run: prisma migrate status
+        run: npx prisma migrate status
       - name: get migration id and push it into github_env
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
