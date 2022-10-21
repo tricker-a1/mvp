@@ -32,7 +32,7 @@ jobs:
             echo ::set-output name=WALLET_ADDRESSES::$WALLET_ADDRESSES
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "Current revision: $KUDOS"
-            echo ::set-output name=INI::$KUDOS
+            echo ::set-output name=KUDOS::$KUDOS
             cd /home/runner/work/mvp/mvp
             npx prisma migrate resolve --rolled-back ${{steps.vars.outputs.KUDOS}}
             npx prisma migrate resolve --rolled-back ${{steps.vars.outputs.WALLET_ADDRESSES}}
