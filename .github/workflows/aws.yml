@@ -26,9 +26,9 @@ jobs:
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{INIT}={$INIT}" 
+            echo "{INIT}={$INIT}" >> $GITHUB_ENV
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" 
+            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" >> $GITHUB_ENV 
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
@@ -38,16 +38,19 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
         run: npx prisma migrate resolve --rolled-back $KUDOS
+        continue-on-error: true
          
       - name: kudos1
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
         run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
+        continue-on-error: true
 
       - name: kudos2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
         run: npx prisma migrate resolve --rolled-back $INIT
+        continue-on-error: true
          
