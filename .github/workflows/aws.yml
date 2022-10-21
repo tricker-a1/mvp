@@ -46,13 +46,13 @@ jobs:
        - name: Run rollback KUDOS if deploy failed
          env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back $KUDOS
+         run: npx prisma migrate resolve --rolled-back ${{env.KUDOS}}
        - name: rollback WALLET_ADDRESSES if deploy failed
          env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
+         run: npx prisma migrate resolve --rolled-back ${{env.WALLET_ADDRESSES}}
         
        - name: Run rollback INIT if deploy failed
          env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back $INIT
+         run: npx prisma migrate resolve --rolled-back ${{env.INIT}}
