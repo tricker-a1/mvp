@@ -32,7 +32,9 @@ jobs:
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
-            
+            echo "$KUDOS"
+            echo "${{ env.KUDOS }}"
+           
       - name: kudos
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
