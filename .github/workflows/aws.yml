@@ -18,19 +18,19 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
             
-      - name: Run production migration
+      - name: Run migration status
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
-        run: |
-         npx prisma migrate status > test.txt
-         cat test.txt
+        run: npx prisma migrate status > test.txt
+         
       - name: get migration id and push it into github_env
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
         id: npx
         run: |            
+            cat test.txt
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
