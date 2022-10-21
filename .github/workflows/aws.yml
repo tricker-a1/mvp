@@ -22,7 +22,7 @@ jobs:
       - name: get migration id
         if: failure()
       
-        run: pwd
+        run: pwd /prisma/migrations
             
       - name: Run rollback if deploy failed
         if: failure()
