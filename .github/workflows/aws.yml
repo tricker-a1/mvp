@@ -22,8 +22,7 @@ jobs:
       - name: get migration id
         if: failure()
       
-        run: |
-            cat errors.txt
+        run: pwd | rev | awk Ã¢â‚¬â€œF / '{print $1}' | rev
             
       - name: Run rollback if deploy failed
         if: failure()
