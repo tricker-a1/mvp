@@ -20,6 +20,7 @@ jobs:
         run: | 
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
+            cd /
             npx prisma migrate deploy --preview-feature
 
       - name: get migration id
