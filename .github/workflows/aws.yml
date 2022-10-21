@@ -37,20 +37,20 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
-        run: npx prisma migrate resolve --rolled-back $env.KUDOS
+        run: npx prisma migrate resolve --rolled-back ${{KUDOS}}
         continue-on-error: true
          
       - name: kudos1
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
-        run: npx prisma migrate resolve --rolled-back $env.WALLET_ADDRESSES
+        run: npx prisma migrate resolve --rolled-back ${{WALLET_ADDRESSES}}
         continue-on-error: true
 
       - name: kudos2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: always()
-        run: npx prisma migrate resolve --rolled-back $env.INIT
+        run: npx prisma migrate resolve --rolled-back ${{INIT}}
         continue-on-error: true
          
