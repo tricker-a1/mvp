@@ -31,7 +31,7 @@ jobs:
             echo "WALLET_ADDRESSES=$WALLET_ADDRESSES" >> $GITHUB_ENV
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt )
             echo "KUDOS=$KUDOS" >> $GITHUB_ENV
-            echo ${{env.WALLET_ADDRESSES}}
+            echo "${{env.WALLET_ADDRESSES}}"
             cd /home/runner/work/mvp/mvp
             npx prisma migrate resolve --rolled-back ${{env.KUDOS}}
             npx prisma migrate resolve --rolled-back ${{env.INIT}}
