@@ -18,7 +18,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
             
-      - name: get migration id and push it into github_env
+      - name: get migration id and rollback prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
