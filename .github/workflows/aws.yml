@@ -23,7 +23,7 @@ jobs:
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            less errors.txt
+            sed '1!d' errors.txt 
             exit 1
 
       - name: Run rollback if deploy failed
