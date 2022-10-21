@@ -33,25 +33,7 @@ jobs:
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{KUDOS}={$KUDOS}" 
             cd /home/runner/work/mvp/mvp
-           
-      - name: kudos
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        if: always()
-        run: npx prisma migrate resolve --rolled-back $KUDOS || true
-        continue-on-error: true
-         
-      - name: kudos1
-        env:
-         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        if: always()
-        run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES || true
-        continue-on-error: true
+            npx prisma migrate resolve --rolled-back $KUDOS || true
+            npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES || true
+            npx prisma migrate resolve --rolled-back $INIT || true
 
-      - name: kudos2
-        env:
-         DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        if: always()
-        run: npx prisma migrate resolve --rolled-back $env.INIT || true
-        continue-on-error: true
-         
