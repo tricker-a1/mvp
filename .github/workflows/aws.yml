@@ -27,5 +27,6 @@ jobs:
             ls -d */  > errors.txt
             
       - name: Run rollback if deploy failed
+        if: success()
         run: cat errors.txt
 
