@@ -33,20 +33,10 @@ jobs:
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{KUDOS}={$KUDOS}" 
             cd /home/runner/work/mvp/mvp
-            
-      - name: Run rollback KUDOS if deploy failed
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        if: failure()
-        run: npx prisma migrate resolve --rolled-back $KUDOS
-         
-      - name: rollback WALLET_ADDRESSES if deploy failed
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
-        
-      - name: Run rollback INIT if deploy failed
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate resolve --rolled-back $INIT
-        
+            npx prisma migrate resolve --rolled-back $KUDOS
+            exit 0
+            npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
+            exit 0
+            npx prisma migrate resolve --rolled-back $INIT
+            exit 0
+
