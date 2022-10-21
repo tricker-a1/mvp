@@ -18,7 +18,6 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
       - name: get migration id and push it into github_env
-        
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
@@ -36,25 +35,25 @@ jobs:
             
          
       - name: kudos
-      - uses: actions/checkout@v2
+
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
-         run: npx prisma migrate resolve --rolled-back $KUDOS
          continue-on-error: true
+      - run: npx prisma migrate resolve --rolled-back $KUDOS
+
          
       - name: kudos1
-      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
-         run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
          continue-on-error: true
-         
+      - run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
+
       - name: kudos2
-      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
-         run: npx prisma migrate resolve --rolled-back $INIT
          continue-on-error: true
+      - run: npx prisma migrate resolve --rolled-back $INIT
+         
