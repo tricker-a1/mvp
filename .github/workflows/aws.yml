@@ -28,18 +28,30 @@ jobs:
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{INIT}={$INIT}" 
-            echo ::set-output name=INIT::$INIT
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" 
-            echo ::set-output name=WALLET_ADDRESSES::$WALLET_ADDRESSES
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
-            echo ::set-output name=KUDOS::$KUDOS 
             cd /home/runner/work/mvp/mvp
-            npx prisma migrate resolve --rolled-back $KUDOS
-            npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
-            npx prisma migrate resolve --rolled-back $INIT
+            
          
-        continue-on-error: true
+      - name: kudos
+        env:
+         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+         if: always()
+         run: npx prisma migrate resolve --rolled-back $KUDOS
+         continue-on-error: true
          
+      - name: kudos
+        env:
+         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+         if: always()
+         run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
+         continue-on-error: true
          
+      - name: kudos
+        env:
+         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+         if: always()
+         run: npx prisma migrate resolve --rolled-back $INIT
+         continue-on-error: true
