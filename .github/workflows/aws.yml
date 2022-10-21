@@ -36,6 +36,7 @@ jobs:
             
          
       - name: kudos
+      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
@@ -43,6 +44,7 @@ jobs:
          continue-on-error: true
          
       - name: kudos1
+      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
@@ -50,6 +52,7 @@ jobs:
          continue-on-error: true
          
       - name: kudos2
+      - uses: actions/checkout@v2
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
          if: always()
