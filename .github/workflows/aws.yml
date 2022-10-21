@@ -26,11 +26,11 @@ jobs:
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{INIT}={$INIT}" 
+            echo "{INIT}={$INIT}" >> $GITHUB_ENV
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" 
+            echo "{WALLET_ADDRESSES}={$WALLET_ADDRESSES}" >> $GITHUB_ENV
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
-            echo "{KUDOS}={$KUDOS}" 
+            echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
             
       - name: kudos
