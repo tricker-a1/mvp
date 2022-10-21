@@ -24,5 +24,8 @@ jobs:
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            less errors.txt
+            
+      - name: cat
+        run:  less errors.txt
+
 
