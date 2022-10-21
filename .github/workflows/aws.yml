@@ -16,7 +16,9 @@ jobs:
       - name: Run production migration
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy --preview-feature
+        run: |
+            npx prisma migrate deploy --preview-feature
+            prisma migrate status
       - name: get migration id and push it into github_env
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
