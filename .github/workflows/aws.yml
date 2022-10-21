@@ -18,10 +18,11 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
       - name: get migration id and push it into github_env
-        id: npx
+        
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
+        id: npx
         run: |            
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
@@ -35,9 +36,9 @@ jobs:
             echo "$KUDOS" >> $GITHUB_ENV
             echo ::set-output name=KUDOS::$KUDOS 
             cd /home/runner/work/mvp/mvp
-            npx prisma migrate resolve --rolled-back ${{env.KUDOS}}
-            npx prisma migrate resolve --rolled-back ${{env.WALLET_ADDRESSES}}
-            npx prisma migrate resolve --rolled-back ${{env.INIT}}
+            npx prisma migrate resolve --rolled-back ${{steps.npx.outputs.KUDOS}}
+            npx prisma migrate resolve --rolled-back ${{steps.npx.outputs.WALLET_ADDRESSES}}
+            npx prisma migrate resolve --rolled-back ${{steps.npx.outputs.INIT}}
             
             
 
