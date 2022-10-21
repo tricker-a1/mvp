@@ -34,25 +34,19 @@ jobs:
             echo "{KUDOS}={$KUDOS}" >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
             
-            
-
-            
-  rollback:
-       runs-on: ubuntu-latest
-       needs: migrate
-       if: failure()
-       steps:
-       - uses: actions/checkout@v2
-       - name: Run rollback KUDOS if deploy failed
-         env:
+      - name: Run rollback KUDOS if deploy failed
+        env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back ${{env.KUDOS}}
-       - name: rollback WALLET_ADDRESSES if deploy failed
-         env:
+        if: failure()
+        run: npx prisma migrate resolve --rolled-back $KUDOS
+         
+      - name: rollback WALLET_ADDRESSES if deploy failed
+        env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back ${{env.WALLET_ADDRESSES}}
+        run: npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
         
-       - name: Run rollback INIT if deploy failed
-         env:
+      - name: Run rollback INIT if deploy failed
+        env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-         run: npx prisma migrate resolve --rolled-back ${{env.INIT}}
+        run: npx prisma migrate resolve --rolled-back $INIT
+        
