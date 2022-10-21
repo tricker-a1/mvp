@@ -18,13 +18,14 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: | 
-            npx prisma migrate deploy --preview-feature > errors.txt
+            npx prisma migrate deploy --preview-feature
       - name: get migration id
         if: failure()
       
         run: |
             cd /home/runner/work/mvp/mvp/prisma/migrations 
-            ls -d */
+            ls -d */  > errors.txt
+            cat errors.txt
             
       - name: Run rollback if deploy failed
         if: failure()
