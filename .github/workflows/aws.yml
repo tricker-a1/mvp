@@ -28,7 +28,10 @@ jobs:
             sed '2!d ; s/.$//' errors.txt > 2.txt
             
             sed '3!d ; s/.$//' errors.txt > 3.txt
-
+            echo 123
+            cat 1.txt
+            cat 2.txt
+            cat 3.txt
             exit 1
             
 
