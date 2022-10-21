@@ -19,14 +19,9 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate deploy --preview-feature
 
-      - name: get migration id
-        if: failure()
-        run: |            
-            cd /home/runner/work/mvp/mvp/prisma/migrations 
-            ls -d */  > errors.txt
-            less errors.txt
+
       - name: Run rollback if deploy failed
-        if: success()
+        if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx prisma migrate resolve --rolled-back 20221014191647_kudos/
