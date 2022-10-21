@@ -33,4 +33,7 @@ jobs:
         if: failure()
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate resolve --rolled-back 20221011112854_init 20221012103315_wallet_addresses 20221014191647_kudos
+        run: |
+             npx prisma migrate resolve --rolled-back 20221014191647_kudos 
+             npx prisma migrate resolve --rolled-back 20221011112854_init 
+             npx prisma migrate resolve --rolled-back 20221012103315_wallet_addresses 
