@@ -18,7 +18,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: | 
-            npx prisma migrate deploy --preview-feature --json > errors.txt
+            npx prisma migrate deploy --preview-feature > errors.txt
       - name: get migration id
         if: failure()
       
