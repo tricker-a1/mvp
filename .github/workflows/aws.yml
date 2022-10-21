@@ -26,13 +26,13 @@ jobs:
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "Current revision: $INIT"
-            echo ::set-output name=INIT::$INIT
+            echo ::set-output name=INIT::$INIT >> $GITHUB_ENV
             WALLET_ADDRESSES=$(sed '2!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "Current revision: $WALLET_ADDRESSES"
-            echo ::set-output name=WALLET_ADDRESSES::$WALLET_ADDRESSES
+            echo ::set-output name=WALLET_ADDRESSES::$WALLET_ADDRESSES >> $GITHUB_ENV
             KUDOS=$(sed '3!d ; s/.$//' /home/runner/work/mvp/mvp/prisma/migrations/errors.txt)
             echo "Current revision: $KUDOS"
-            echo ::set-output name=KUDOS::$KUDOS
+            echo ::set-output name=KUDOS::$KUDOS >> $GITHUB_ENV
             cd /home/runner/work/mvp/mvp
             npx prisma migrate resolve --rolled-back ${{steps.vars.outputs.KUDOS}}
             npx prisma migrate resolve --rolled-back ${{steps.vars.outputs.WALLET_ADDRESSES}}
