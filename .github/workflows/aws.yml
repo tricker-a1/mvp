@@ -24,7 +24,8 @@ jobs:
       
         run: |
             cd /home/runner/work/mvp/mvp/prisma/migrations 
-            pwd
+            ls
+            basename
             
       - name: Run rollback if deploy failed
         if: failure()
