@@ -37,7 +37,6 @@ jobs:
             echo ::set-output name=KUDOS::$KUDOS 
             cd /home/runner/work/mvp/mvp
             npx prisma migrate resolve --rolled-back $KUDOS
-            exit 0
             npx prisma migrate resolve --rolled-back $WALLET_ADDRESSES
             exit 0
             npx prisma migrate resolve --rolled-back ${{env.INIT}}
