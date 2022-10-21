@@ -25,10 +25,7 @@ jobs:
         run: |
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
-            cat errors.txt
             
       - name: Run rollback if deploy failed
-        env:
-         DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: cat errors.txt
 
