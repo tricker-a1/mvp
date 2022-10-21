@@ -24,11 +24,11 @@ jobs:
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             sed '1!d ; s/.$//' errors.txt > 1.txt
-            cat 1.txt
+            
             sed '2!d ; s/.$//' errors.txt > 2.txt
-            cat 2.txt
+            
             sed '3!d ; s/.$//' errors.txt > 3.txt
-            cat 3.txt
+            
             exit 1
             
 
@@ -37,6 +37,9 @@ jobs:
         env:
          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
+             cat 1.txt
+             cat 2.txt
+             cat 3.txt
              npx prisma migrate resolve --rolled-back 20221014191647_kudos 
              npx prisma migrate resolve --rolled-back 20221011112854_init 
              npx prisma migrate resolve --rolled-back 20221012103315_wallet_addresses 
