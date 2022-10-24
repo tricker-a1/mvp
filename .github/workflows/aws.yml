@@ -16,13 +16,14 @@ jobs:
       - name: Run production migration
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npx prisma migrate deploy --preview-feature
+        run: npx prisma migrate deploy --preview-feature >> test.txt
             
       - name: get migration id and rollback prisma
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
-        run: |            
+        run: |       
+            cat test.txt
             cd /home/runner/work/mvp/mvp/prisma/migrations 
             ls -d */  > errors.txt
             INIT=$(sed '1!d ; s/.$//' errors.txt) 
