@@ -10,7 +10,7 @@ CREATE TABLE "KudosTransaction" (
     "status" "TransactionStatus" NOT NULL DEFAULT 'Pending',
     "amount" INTEGER NOT NULL,
     "senderId" UUID,
-    "recipientId" INTEGER NOT NULL,
+    "recipientId" UUID,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     
