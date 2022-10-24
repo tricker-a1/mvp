@@ -17,7 +17,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-            npx prisma migrate deploy --preview-feature >> test.txt
+            npx prisma migrate deploy --preview-feature
             
       - name: get migration id and rollback prisma
         env:
