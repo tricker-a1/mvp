@@ -27,7 +27,7 @@ CREATE TABLE "User" (
     "wallets" TEXT[] DEFAULT ARRAY[]::TEXT[],
     "permissions" "Permission"[],
     "customerId" TEXT,
-    "companyId" INTEGER NOT NULL,
+    "companyId" UUID,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
