@@ -7,7 +7,9 @@ do
          migration_$i=$(sed "$i!d ; s/.\$//" errors.txt)
 done
 cd /home/runner/work/mvp/mvp
+
 for i in {1..5}
 do
+          echo "${!migration_$i}"
           npx prisma migrate resolve --rolled-back ${!migration_${!i}} || true
 done
