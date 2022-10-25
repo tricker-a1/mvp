@@ -9,5 +9,5 @@ done
 cd /home/runner/work/mvp/mvp
 for i in {1..5}
 do
-          npx prisma migrate resolve --rolled-back $i || true
+          npx prisma migrate resolve --rolled-back $$i || true
 done
