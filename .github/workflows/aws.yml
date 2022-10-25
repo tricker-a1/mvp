@@ -22,4 +22,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         if: failure()
-        run: rollback.sh
+        run: |
+           chmod +x /home/runner/work/mvp/mvp/rollback.sh
+           /home/runner/work/mvp/mvp/rollback.sh
+           shell: bash
